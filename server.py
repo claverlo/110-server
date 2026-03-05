@@ -163,6 +163,7 @@ def get_coupons_count():
 
 
 # POST /api/coupons endpoint that adds a new coupon in coupons list.
+#http://127.0.0.1:5000/api/coupons
 @app.route("/api/coupons", methods=["POST"])
 def create_coupon():
     new_coupon = request.get_json()
@@ -174,7 +175,9 @@ def create_coupon():
         "message": "Coupon successfully created",
         "data": new_coupon
     }), HTTPStatus.CREATED  # 201
-# GET /api/coupons/<int:id> endpoint that returns a coupon that matches the given id.
+
+# GET /api/coupons/<int:id> endpoint that returns a coupon that matches the given id..
+#http://127.0.0.1:5000/api/coupons/2
 @app.route("/api/coupons/<int:coupon_id>", methods=["GET"])
 def get_coupon_by_id(coupon_id):
 
