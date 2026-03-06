@@ -140,6 +140,47 @@ def get_product_by_id(product_id):
       "message": "Product not found"    
     }), HTTPStatus.NOT_FOUND # 404
 
+# PUT - update a product by Id
+@app.route("/api/products/<int:product_id>", methods=["PUT"])
+def update_product_by_id(product_id):
+    updated_product = request.get_json()
+    for product in products:
+        if product["_id"] == product_id:
+            product["title"] = updated_product["title"]
+            product["price"] = updated_product["price"]
+            product["category"] = updated_product["category"]
+            product["image"] = updated_product["image"]
+
+            return jsonify({
+                "success": True,
+                "message": "Product Updated Successfully"
+            }), HTTPStatus.OK  # 200
+
+    return jsonify({
+        "success": False,
+        "message": "Product Not Updated"
+    }), HTTPStatus.NOT_FOUND  # 404
+
+
+
+# DELETE -- delete a product by id
+# DELETE http://127.0.0.1:5000/api/products/<int:product_id>
+@app.route("/api/products/<int:product_id>", methods=["DELETE"])
+def delete_product_by_id(product_id):
+    for product in products:
+        if product["_id"] == product_id:
+            products.remove(product)
+
+            return jsonify({
+                "success": True,
+                "message": "Product deleted successfully"
+            }), HTTPStatus.OK # 200
+
+    return jsonify({
+        "success": False,
+        "message": "product Not Found"
+    }), HTTPStatus.NOT_FOUND # 404
+
 
 # ------------ COUPONS ------------
 coupons = [
@@ -195,6 +236,54 @@ def get_coupon_by_id(coupon_id):
     }), HTTPStatus.NOT_FOUND  # 404
 
 
+
+    #  Final Report 
+#Put /api/coupons/<int:id>   endpoint that allows editing an existing coupon by its id.
+#if the coupon is not found, return an appropriate error message and status code.
+
+#http://127.0.0.1:5000/api/coupons/1
+@app.route("/api/coupons/<int:coupon_id>", methods=["PUT"])
+def update_coupon_by_id(coupon_id):
+    updated_coupon = request.get_json()
+
+    for coupon in coupons:
+        if coupon["_id"] == coupon_id:
+            coupon["code"] = updated_coupon["code"]
+            coupon["discount"] = updated_coupon["discount"]
+
+            return jsonify({
+                "success": True,
+                "message": "Coupon updated successfully",
+                "data": coupon
+            }), HTTPStatus.OK
+
+    return jsonify({
+        "success": False,
+        "message": "Coupon not found"
+    }), HTTPStatus.NOT_FOUND
+
+
+
+#Delete /api/coupons/<int:id>  endpoint that allows deleting an existing coupon by its id.
+#if the coupon is not found, return an appropriate error message and status code.
+
+#http://127.0.0.1:5000/api/coupons/1
+@app.route("/api/coupons/<int:coupon_id>", methods=["DELETE"])
+def delete_coupon_by_id(coupon_id):
+
+    for coupon in coupons:
+        if coupon["_id"] == coupon_id:
+            coupons.remove(coupon) 
+
+            return jsonify({
+                "success": True,
+                "message": "Coupon deleted successfully"
+            }), HTTPStatus.OK
+
+    return jsonify({
+        "success": False,
+        "message": "Coupon not found"
+    }), HTTPStatus.NOT_FOUND
 
 
 
