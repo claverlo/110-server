@@ -1,14 +1,310 @@
----- Create venv -----
-WIN py/python -m venv venv
-MacOS python3 -m venv venv
 
------ Activate the venv -----
-WIN venv\Scripts\activate
-MacOS source venv/bin/activate
 
----- Install Flask ----
+# Flask Notes
+
+---
+
+# 1. Environment Setup
+
+## Create venv
+
+WIN
+
+```
+py/python -m venv venv
+```
+
+MacOS
+
+```
+python3 -m venv venv
+```
+
+---
+
+## Activate the venv
+
+WIN
+
+```
+venv\Scripts\activate
+```
+
+MacOS
+
+```
+source venv/bin/activate
+```
+
+---
+
+## Install Flask
+
+```
 pip install Flask
+```
 
------ Run App -----
-WIN py/python server.py
-MacOS python3 server.py
+---
+
+## Run App
+
+WIN
+
+```
+py/python server.py
+```
+
+MacOS
+
+```
+python3 server.py
+```
+
+---
+
+# 2. HTTP Methods (Common Ones Used in Flask)
+
+## GET
+
+➡️ Get data
+
+Example:
+
+```
+GET /students
+```
+
+Meaning: “Give me the students.”
+
+---
+
+## POST
+
+➡️ Create new data
+
+Example:
+
+```
+POST /students
+```
+
+Meaning: “Add a new student.”
+
+---
+
+## PUT
+
+➡️ Update data
+
+Example:
+
+```
+PUT /students/5
+```
+
+Meaning: “Update student #5.”
+
+---
+
+## DELETE
+
+➡️ Remove data
+
+Example:
+
+```
+DELETE /students/5
+```
+
+Meaning: “Delete student #5.”
+
+---
+
+# 3. API
+
+API = An API is a way for programs to talk to each other.
+
+---
+
+# 4. Web Application
+
+A web application is just a program that runs on a web server and responds to URLs.
+
+---
+
+# 5. URL Breakdown
+
+This URL means:
+
+```
+http → how to communicate
+127.0.0.1 → your computer
+5000 → the port (where the server is running)
+/students → the route in your Flask app
+```
+
+---
+
+# 6. Flask
+
+Flask(tool ) = creates the Flask application (the web server).
+
+Without Flask, your Python program usually just runs in the terminal.
+
+Flask connects your Python program to a web address that can be accessed by a browser or by Thunder Client.
+
+---
+
+# 7. jsonify
+
+jsonify comes from Flask.
+
+the jsonify is a function (a tool) inside Flask, not a full program.
+
+jsonify converts Python data into JSON and sends it to the client.
+
+---
+
+# 8. JSON
+
+JSON = It is just a data format used to store or send information.
+
+JSON uses JavaScript-style syntax.
+
+It only uses basic JavaScript object format.
+
+for Example =
+
+---
+
+# 9. Request
+
+Request = receives data sent by a client such as a web browser, Thunder Client, a mobile app, or another program.
+
+---
+
+# 10. Flask App
+
+flask app =
+
+Receive request and respond
+
+---
+
+# 11. Workflow
+
+```
+Flask → starts server
+Client → sends request
+request → reads client data
+Python → processes data
+jsonify → sends response back
+```
+
+---
+
+# 12. Simple Workflow (with HOW)
+
+## 1️⃣ Flask starts the server
+
+How?
+
+You run the program:
+
+```
+python app.py
+```
+
+Flask starts a server at:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+## 2️⃣ Client sends request
+
+How?
+
+By typing a URL or sending a request.
+
+Example:
+
+Browser:
+
+```
+http://127.0.0.1:5000/hello
+```
+
+or Thunder Client
+
+```
+GET /api/products
+```
+
+---
+
+## 3️⃣ request reads client data
+
+How?
+
+Using this line:
+
+```
+request.get_json()
+```
+
+Example:
+
+```
+data = request.get_json()
+```
+
+This reads the JSON sent by the client.
+
+---
+
+## 4️⃣ Python processes the data
+
+How?
+
+Using normal Python code.
+
+Example:
+
+```
+products.append(data)
+```
+
+or
+
+```
+if product["_id"] == product_id:
+```
+
+---
+
+## 5️⃣ jsonify sends response back
+
+How?
+
+Using:
+
+```
+return jsonify(data)
+```
+
+Flask sends the JSON response to the client.
+
+Example response:
+
+```
+{
+ "success": true
+}
+```
+
+---
+
+If you want, I can also show you **a MUCH better “developer cheat sheet” layout (the way senior programmers organize Flask notes)** so when you study it, everything clicks faster.
